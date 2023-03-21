@@ -17,6 +17,7 @@ try {
     // sys::db_connect(conf::$DB_SERVER_NAME,conf::$DB_USER_NAME, conf::$DB_PASSWORD, conf::$DB_NAME);
     
     //Роутинг запроса
+    sys::gettoken();
     Route::start();
 }
 catch (Exception $e) {

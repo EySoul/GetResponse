@@ -120,5 +120,21 @@ class sys {
     return $version;
   }
   
+  static function gettoken()
+  {
+    $crl = curl_init();
+
+    curl_setopt($crl,CURLOPT_HTTPHEADER, conf::$TOKEN_HEADERS);
+    curl_setopt($crl,CURLOPT_URL, conf::$TOKEN_URL);
+    curl_setopt($crl,CURLOPT_POST,true);
+    curl_setopt($crl,CURLOPT_POSTFIELDS,conf::$TOKEN_BODY);
+    curl_setopt($crl,CURLOPT_RETURNTRANSFER,true);
+    $res = curl_exec($crl);
+    curl_close($crl);
+
+    $uncodeToken = json_decode($res)->access_token;
+    conf::$TOKEN = $uncodeToken;
+  }
+
 }
 

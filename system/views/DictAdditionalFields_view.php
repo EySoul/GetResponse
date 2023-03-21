@@ -1,7 +1,7 @@
 <div>
 
   <?php
-    echo $data['table'];
+    var_dump( $data['table']);
   ?>
 
 </div>
