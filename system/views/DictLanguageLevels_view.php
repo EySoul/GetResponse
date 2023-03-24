@@ -1,7 +1,9 @@
 <div>
 
   <?php
-    echo $data['table'];
+  $table = $data['table'];
+  var_dump($table);
+  // sys::viewDefaultTable($table);
   ?>
 
 </div>

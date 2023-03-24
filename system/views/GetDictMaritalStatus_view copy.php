@@ -2,7 +2,7 @@
 
   <?php
   $table = $data['table'];
-  var_dump($table);
+  echo 'Nothing to view: no have url';
   // sys::viewDefaultTable($table);
   ?>
 

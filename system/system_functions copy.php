@@ -138,32 +138,32 @@ class sys {
 
   static function viewTwoLevelTable($table,$SecLevelName)
   {
-    $result ='';
     $nextLevelTable = array();
   
-    $result .= '<table class="table table-bordered">';
-    $result .= '<tr>';
+    echo '<table class="table ">';
+    echo '<tr>';
     foreach ($table[0] as $key => $value) {
-      $result .= '<th>'.$key.'</th>';
+      echo '<th>'.$key.'</th>';
     }
     $counter = 0;
   
    foreach ($table as $num) {
     // $num = $table[0];
-    $result .= '<tr>';
+    echo '<tr>';
       foreach ($num as $el => $field) {
         
     $counter++;
+        // if($el == 'dictOrderType'||$el == 'dictStudyLevel'){
         if(!is_array($SecLevelName))
           $SecLevelName = array($SecLevelName);
         if(in_array($el,$SecLevelName)){
-          $result .= '
+          echo '
           <td>
           <button  class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#'.$el.$counter.'" aria-expanded="false" aria-controls="'.$el.$counter.'" >Доп таблица</button>
           </td>';
           $nextLevelTable[]='
           <tr><td class="collapse table-secondary" id="'.$el.$counter.'" colspan ="7">
-          <table class="table border-white">
+          <table class="table">
           <tr>
           '.self::_getForEachHtml($field,'<th>','</th>',false).'
           </tr>
@@ -175,51 +175,50 @@ class sys {
           </tr>'; 
         }
         else{
-          $result .= '
+          echo '
           <td>'.$field.'</td>
           ';
         }
       }
-      $result .= '</tr>';
+      echo '</tr>';
       foreach ($nextLevelTable as $value) {
-        $result .= $value;
+        echo $value;
       }
       $nextLevelTable = null;
   
     }
-    $result .= '</table>';
-    return $result;
+    echo '</table>';
   
   }
 
   static function viewDefaultTable($table)
   {
-    $result  = '';
-    $result .='<table class="table table-bordered">';
-    $result .='<tr>';
+    $result = '';
+    
+      echo '<table class="table">';
+      echo '<tr>';
       foreach ($table[0] as $key => $value) {
-        $result .= '<th>'.$key.'</th>';
+        echo '<th>'.$key.'</th>';
       }
-      $result .= '</tr>';
+      echo '</tr>';
     
     
       foreach ($table as $num) {
-        $result .= '<tr>';
+        echo '<tr>';
         foreach ($num as $el => $field) {
           if(is_array($field)){
-            $result .= '
+            echo '
             <td>'.implode($field).'</td>
             ';
             continue;
           }
-          $result .= '
+          echo '
           <td>'.$field.'</td>
           ';
         }
-        $result .= '</tr>';
+        echo '</tr>';
       }
-      $result .= '</table>';
-      return $result;
+      echo '</table>';
   }
   static function getResponse($URLget)
   {

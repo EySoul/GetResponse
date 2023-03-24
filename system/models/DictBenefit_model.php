@@ -14,7 +14,8 @@ class DictBenefit_model extends model
   
   // модель для запроса из бд при загрузке основного представления        
   function table() {
-    $return = 'okey';
+    $URLget ='/contingent/d/benefit';
+    $return = sys::getResponse($URLget);
 
     return $return;
   }

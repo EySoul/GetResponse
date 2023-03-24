@@ -14,7 +14,11 @@ class GetDepartments_model extends model
   
   // модель для запроса из бд при загрузке основного представления        
   function table() {
-    $return = 'GetDepartments))';
+
+    $URLget = "/contingent/department/GetDepartments";
+
+    
+    $return = sys::getResponse($URLget);
 
     return $return;
   }

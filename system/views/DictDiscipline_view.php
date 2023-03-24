@@ -1,7 +1,8 @@
 <div>
 
-  <?php
-    echo $data['table'];
-  ?>
+<?php
+  $table = $data['table'];
+  echo sys::viewTwoLevelTable($table,'dictDisciplineType');
+?>
 
 </div>

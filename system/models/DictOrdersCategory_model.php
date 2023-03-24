@@ -14,7 +14,8 @@ class DictOrdersCategory_model extends model
   
   // модель для запроса из бд при загрузке основного представления        
   function table() {
-    $return = 'okey';
+    $url ='/contingent/d/orderscategory';
+    $return = sys::getResponse($url);
 
     return $return;
   }

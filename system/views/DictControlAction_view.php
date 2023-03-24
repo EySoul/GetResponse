@@ -1,10 +1,9 @@
 <div>
 
-<?php
+  <?php
   $table = $data['table'];
   echo sys::viewDefaultTable($table);
-
-    
   ?>
 
 </div>
+<!-- DictControlAction -->

@@ -54,6 +54,10 @@ $CURRENT_PAGE = $arr['path']; // получаем конечный адрес
           font-size: 3.5rem;
         }
       }
+      .overf-scroll
+     {
+        overflow-y: auto;
+     }
     </style>
 
     
@@ -69,12 +73,12 @@ $CURRENT_PAGE = $arr['path']; // получаем конечный адрес
       <span class="fs-4">Gets</span>
     </a>
     <hr>
-    <ul class="nav flex-column overf-auto " style="flex-wrap: nowrap; flex: auto">
+    <ul class="nav flex-column overf-scroll " style="flex-wrap: nowrap; flex: auto">
       <li class="nav-item"><a class="nav-link def-nav-bar" href="<?php echo conf::$SITE_URL;?>GetDepartments" >Получить отделы</a></li>
       <li class="nav-item"><a class="nav-link def-nav-bar" href="<?php echo conf::$SITE_URL;?>DictControlAction" >Дикт управления действием</a></li>
       <li class="nav-item"><a class="nav-link def-nav-bar" href="<?php echo conf::$SITE_URL;?>DictDiscipline" >Дикт Дисциплина</a></li>
       <li class="nav-item"><a class="nav-link def-nav-bar" href="<?php echo conf::$SITE_URL;?>DictDisciplineType" >Дикт Типа Дисциплины</a></li>
-      <li class="nav-item"><a class="nav-link def-nav-bar" href="<?php echo conf::$SITE_URL;?>DictQualification" >Дикт Отметок</a></li>
+      <li class="nav-item"><a class="nav-link def-nav-bar" href="<?php echo conf::$SITE_URL;?>DictMark" >Дикт Отметок</a></li>
       <li class="nav-item"><a class="nav-link def-nav-bar" href="<?php echo conf::$SITE_URL;?>DictQualification" >Дикт Квалификаций</a></li>
       <li class="nav-item"><a class="nav-link def-nav-bar" href="<?php echo conf::$SITE_URL;?>DictStudyForm" >Дикт Учебных Форм</a></li>
       <li class="nav-item"><a class="nav-link def-nav-bar" href="<?php echo conf::$SITE_URL;?>DictStudyFormType" >Дикт Типов Учебных Форм</a></li>
@@ -83,7 +87,7 @@ $CURRENT_PAGE = $arr['path']; // получаем конечный адрес
       <li class="nav-item"><a class="nav-link def-nav-bar" href="<?php echo conf::$SITE_URL;?>DictTrainingLevel" >Дикт Тренеровочного уровня</a></li>
       <li class="nav-item"><a class="nav-link def-nav-bar" href="<?php echo conf::$SITE_URL;?>DictBenefit" >Дикт Преимуществ</a></li>
       <li class="nav-item"><a class="nav-link def-nav-bar" href="<?php echo conf::$SITE_URL;?>DictCitizenship" >Дикт Гражданства</a></li>
-      <li class="nav-item"><a class="nav-link def-nav-bar" href="<?php echo conf::$SITE_URL;?>DictCitizenshipType" >Дикт Типа Кражданства</a></li>
+      <li class="nav-item"><a class="nav-link def-nav-bar" href="<?php echo conf::$SITE_URL;?>DictCitizenshipType" >Дикт Типа Гражданства</a></li>
       <li class="nav-item"><a class="nav-link def-nav-bar" href="<?php echo conf::$SITE_URL;?>DictCityTypes" >Дикт Типа Городов</a></li>
       <li class="nav-item"><a class="nav-link def-nav-bar" href="<?php echo conf::$SITE_URL;?>DictEducationDocTypes" >Дикт Типов образовательных документов</a></li>
       <li class="nav-item"><a class="nav-link def-nav-bar" href="<?php echo conf::$SITE_URL;?>DictEmailTypes" >Дикт Типов Email</a></li>
@@ -123,10 +127,10 @@ $CURRENT_PAGE = $arr['path']; // получаем конечный адрес
     
   </div>
   <div class="b-example-divider"></div>
-
-  <div class="p2 ml-2">
+  <div class="p2 ml-2 overf-scroll">
       <?php
-        include("system/views/DictAdditionalFields_view.php");
+        if(!$CURRENT_PAGE == null)
+          include("system/views/{$CURRENT_PAGE}_view.php");
       ?>
   </div>
  
@@ -134,7 +138,8 @@ $CURRENT_PAGE = $arr['path']; // получаем конечный адрес
 
 
     <!-- <script src="<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script></script> -->
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="js/sidebars.js"></script>
   </body>
 </html>

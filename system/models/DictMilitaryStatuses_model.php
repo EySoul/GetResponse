@@ -14,7 +14,8 @@ class DictMilitaryStatuses_model extends model
   
   // модель для запроса из бд при загрузке основного представления        
   function table() {
-    $return = 'okey';
+    $url = '/contingent/d/militarystatuses';
+    $return = sys::getResponse($url);
 
     return $return;
   }

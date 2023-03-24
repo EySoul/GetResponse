@@ -14,9 +14,10 @@ class DictDisciplineType_model extends model
   
   // модель для запроса из бд при загрузке основного представления        
   function table() {
-    $return = 'okey';
 
-    return $return;
+  $URLget = "/d/disciplinetype";
+  $return = sys::getResponse($URLget);
+  return $return;
   }
   
   // модель для удалени
