@@ -19,9 +19,9 @@ class DictDiscipline_model extends model
   }
   
   // модель для запроса из бд при загрузке основного представления        
-  function table($get = null) {
+  function table($id = null) {
 
-  $URLget = "/d/discipline/".$get;
+  $URLget = "/d/discipline/".$id;
 
   $return = sys::getResponse($URLget);
 

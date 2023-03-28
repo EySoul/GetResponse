@@ -136,34 +136,68 @@ class sys {
     conf::$TOKEN = $uncodeToken;
   }
 
-  static function viewTwoLevelTable($table,$SecLevelName)
+
+  static function viewTwoLevelIdTable($table)
   {
+    $result ='';
     $nextLevelTable = array();
   
-    echo '<table class="table ">';
-    echo '<tr>';
+    $result .= '<table class="table table-bordered">';
+    $result .= '<tr>';
+    foreach ($table as $key => $value) {
+      $result .= '<th>'.$key.'</th>';
+    }
+    
+    $result .= '</tr><tr>';
+
+    foreach ($table as $key => $value) {
+      if(is_object($value))
+      {
+        $nextLevelTable[] = '<td colspan="7" class="table-secondary"><table class="table border-white"><tr>'.
+        self::_getForEachHtml($value,'<th>','</th>',false).'</tr><tr>'.self::_getForEachHtml($value,'<td>','</td>',true);
+        $result .= '<td>==></td>';
+        continue;
+      }
+      $result .= '<td>'.$value.'</td>';
+    }
+    $result .= '</tr>';
+    foreach ($nextLevelTable as $key ) {
+      $result .= $key;
+    }
+     $result .= '</table>';
+    return $result;
+ 
+  
+  }
+
+  static function viewTwoLevelTable($table,$SecLevelName)
+  {
+    $result ='';
+    $nextLevelTable = array();
+  
+    $result .= '<table class="table table-bordered">';
+    $result .= '<tr>';
     foreach ($table[0] as $key => $value) {
-      echo '<th>'.$key.'</th>';
+      $result .= '<th>'.$key.'</th>';
     }
     $counter = 0;
   
    foreach ($table as $num) {
     // $num = $table[0];
-    echo '<tr>';
+    $result .= '<tr>';
       foreach ($num as $el => $field) {
         
     $counter++;
-        // if($el == 'dictOrderType'||$el == 'dictStudyLevel'){
         if(!is_array($SecLevelName))
           $SecLevelName = array($SecLevelName);
         if(in_array($el,$SecLevelName)){
-          echo '
+          $result .= '
           <td>
           <button  class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#'.$el.$counter.'" aria-expanded="false" aria-controls="'.$el.$counter.'" >Доп таблица</button>
           </td>';
           $nextLevelTable[]='
           <tr><td class="collapse table-secondary" id="'.$el.$counter.'" colspan ="7">
-          <table class="table">
+          <table class="table border-white">
           <tr>
           '.self::_getForEachHtml($field,'<th>','</th>',false).'
           </tr>
@@ -175,50 +209,51 @@ class sys {
           </tr>'; 
         }
         else{
-          echo '
+          $result .= '
           <td>'.$field.'</td>
           ';
         }
       }
-      echo '</tr>';
+      $result .= '</tr>';
       foreach ($nextLevelTable as $value) {
-        echo $value;
+        $result .= $value;
       }
       $nextLevelTable = null;
   
     }
-    echo '</table>';
+    $result .= '</table>';
+    return $result;
   
   }
 
   static function viewDefaultTable($table)
   {
-    $result = '';
-    
-      echo '<table class="table">';
-      echo '<tr>';
+    $result  = '';
+    $result .='<table class="table table-bordered">';
+    $result .='<tr>';
       foreach ($table[0] as $key => $value) {
-        echo '<th>'.$key.'</th>';
+        $result .= '<th>'.$key.'</th>';
       }
-      echo '</tr>';
+      $result .= '</tr>';
     
     
       foreach ($table as $num) {
-        echo '<tr>';
+        $result .= '<tr>';
         foreach ($num as $el => $field) {
           if(is_array($field)){
-            echo '
+            $result .= '
             <td>'.implode($field).'</td>
             ';
             continue;
           }
-          echo '
+          $result .= '
           <td>'.$field.'</td>
           ';
         }
-        echo '</tr>';
+        $result .= '</tr>';
       }
-      echo '</table>';
+      $result .= '</table>';
+      return $result;
   }
   static function getResponse($URLget)
   {
@@ -243,7 +278,7 @@ class sys {
     return $return;
   }
 
-  private function _getForEachHtml($field,$start,$end,$val)
+  private function _getForEachHtml($field,$start,$end,$val = false)
   {
     $result = '';
     if(!$val)

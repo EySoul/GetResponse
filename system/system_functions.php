@@ -147,50 +147,34 @@ class sys {
     foreach ($table as $key => $value) {
       $result .= '<th>'.$key.'</th>';
     }
-    $counter = 0;
-  
-    $result .= '<tr>';
-      foreach ($table as $el => $field) {
-        
-    $counter++;
-        if(is_object($el)){
-          $result .= '
-          <td>
-          ==>
-          </td>';
-          $nextLevelTable[]='
-          <tr><td id="'.$el.$counter.'" colspan ="7">
-          <table class="table border-white">
-          <tr>
-          '.self::_getForEachHtml($field,'<th>','</th>',false).'
-          </tr>
-          <tr>'
-          .self::_getForEachHtml($field,'<td>','</td>',true).'
-          </tr>
-          </table>
-          </td>
-          </tr>'; 
-        }
-        else{
-          $result .= '
-          <td>'.$field.'</td>
-          ';
-        }
-      }
-      $result .= '</tr>';
-      foreach ($nextLevelTable as $value) {
-        $result .= $value;
-      }
-      $nextLevelTable = null;
-  
     
-    $result .= '</table>';
+    $result .= '</tr><tr>';
+
+    foreach ($table as $key => $value) {
+      if(is_object($value))
+      {
+        $nextLevelTable[] = '<td colspan="7" class="table-secondary"><table class="table border-white"><tr>'.
+        self::_getForEachHtml($value,'<th>','</th>',false).'</tr><tr>'.self::_getForEachHtml($value,'<td>','</td>',true);
+        $result .= '<td>==></td>';
+        continue;
+      }
+      $result .= '<td>'.$value.'</td>';
+    }
+    $result .= '</tr>';
+    foreach ($nextLevelTable as $key ) {
+      $result .= $key;
+    }
+     $result .= '</table>';
     return $result;
+ 
   
   }
 
   static function viewTwoLevelTable($table,$SecLevelName)
   {
+    $url = basename($_SERVER['REQUEST_URI']);
+    $url = parse_url($url);
+    $url = $url['path'];
     $result ='';
     $nextLevelTable = array();
   
@@ -202,14 +186,11 @@ class sys {
     $counter = 0;
   
    foreach ($table as $num) {
-    // $num = $table[0];
     $result .= '<tr>';
       foreach ($num as $el => $field) {
         
     $counter++;
-        if(!is_array($SecLevelName))
-          $SecLevelName = array($SecLevelName);
-        if(in_array($el,$SecLevelName)){
+        if(is_object($field)){
           $result .= '
           <td>
           <button  class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#'.$el.$counter.'" aria-expanded="false" aria-controls="'.$el.$counter.'" >Доп таблица</button>
@@ -226,6 +207,11 @@ class sys {
           </table>
           </td>
           </tr>'; 
+        }
+        else if($el == $SecLevelName)
+        {
+          $result .= '
+          <td><a class="link-dark" href="'.$url.'?id='.$field.'">'.$field.'</a></td>';
         }
         else{
           $result .= '
@@ -297,7 +283,7 @@ class sys {
     return $return;
   }
 
-  private function _getForEachHtml($field,$start,$end,$val)
+  private function _getForEachHtml($field,$start,$end,$val = false)
   {
     $result = '';
     if(!$val)

@@ -8,11 +8,11 @@
 <?php
   $table = $data['table'];
 
-  // if(empty($_GET["id"]))
+  if(empty($_GET["id"]))
   {
-    echo sys::viewTwoLevelTable($table,'dictDisciplineType');
+    echo sys::viewTwoLevelTable($table,'dictDisciplineExternalId');
   }
-
+  else echo sys::viewTwoLevelIdTable($table);
   
 
 ?>

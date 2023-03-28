@@ -129,7 +129,7 @@ $CURRENT_PAGE = $arr['path']; // получаем конечный адрес
   <div class="b-example-divider"></div>
   <div class="p2 ml-2 overf-scroll">
       <?php
-        if(!$CURRENT_PAGE == null)
+        if($CURRENT_PAGE <> null)
           include("system/views/{$CURRENT_PAGE}_view.php");
       ?>
   </div>
