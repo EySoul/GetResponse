@@ -7,15 +7,21 @@ class DictDiscipline_model extends model
   {
     $return = array();
     $return['title'] = 'Model';
-    $return['table'] = self::table();
-    
+    if(empty($_GET["id"]))
+    {
+      $return['table'] = self::table();
+      return $return;
+    }
+
+    $return['table'] = self::table($_GET["id"]);
     return $return;
+
   }
   
   // модель для запроса из бд при загрузке основного представления        
-  function table() {
+  function table($get = null) {
 
-  $URLget = "/d/discipline";
+  $URLget = "/d/discipline/".$get;
 
   $return = sys::getResponse($URLget);
 

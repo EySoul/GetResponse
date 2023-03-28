@@ -136,6 +136,59 @@ class sys {
     conf::$TOKEN = $uncodeToken;
   }
 
+
+  static function viewTwoLevelIdTable($table)
+  {
+    $result ='';
+    $nextLevelTable = array();
+  
+    $result .= '<table class="table table-bordered">';
+    $result .= '<tr>';
+    foreach ($table as $key => $value) {
+      $result .= '<th>'.$key.'</th>';
+    }
+    $counter = 0;
+  
+    $result .= '<tr>';
+      foreach ($table as $el => $field) {
+        
+    $counter++;
+        if(is_object($el)){
+          $result .= '
+          <td>
+          ==>
+          </td>';
+          $nextLevelTable[]='
+          <tr><td id="'.$el.$counter.'" colspan ="7">
+          <table class="table border-white">
+          <tr>
+          '.self::_getForEachHtml($field,'<th>','</th>',false).'
+          </tr>
+          <tr>'
+          .self::_getForEachHtml($field,'<td>','</td>',true).'
+          </tr>
+          </table>
+          </td>
+          </tr>'; 
+        }
+        else{
+          $result .= '
+          <td>'.$field.'</td>
+          ';
+        }
+      }
+      $result .= '</tr>';
+      foreach ($nextLevelTable as $value) {
+        $result .= $value;
+      }
+      $nextLevelTable = null;
+  
+    
+    $result .= '</table>';
+    return $result;
+  
+  }
+
   static function viewTwoLevelTable($table,$SecLevelName)
   {
     $result ='';

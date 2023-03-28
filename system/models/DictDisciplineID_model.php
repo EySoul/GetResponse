@@ -1,23 +1,23 @@
 <?php
 
-class DictDiscipline_model extends model 
+class DictDisciplineID_model extends model 
 {
 
-  public function get_data($id = null) 
+  public function get_data() 
   {
     $return = array();
     $return['title'] = 'Model';
-    $return['table'] = self::table($id);
+    $return['table'] = self::table();
     
     return $return;
   }
   
   // модель для запроса из бд при загрузке основного представления        
-  function table($id) {
+  function table() {
     if(conf::$TOKEN == null)
     sys::gettoken();
   // $token = sys::gettoken();
-  $URLget = "/d/discipline/".$id;
+  $URLget = "/d/discipline/".$_GET["id"];
   $header = array(
     "Content-Type: application/x-www-form-urlencoded",
     "Authorization: Bearer ".conf::$TOKEN
