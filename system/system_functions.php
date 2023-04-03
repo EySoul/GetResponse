@@ -177,6 +177,7 @@ class sys {
     $url = $url['path'];
     $result ='';
     $nextLevelTable = array();
+    $modelview = array();
   
     $result .= '<table class="table table-bordered">';
     $result .= '<tr>';
@@ -211,7 +212,28 @@ class sys {
         else if($el == $SecLevelName)
         {
           $result .= '
-          <td><a class="link-dark" href="'.$url.'?id='.$field.'">'.$field.'</a></td>';
+          <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#'.$el.$counter.'">
+            '.$field.'
+          </button></td>';
+          $modelview[] = '<div class="modal  fade" id="'.$el.$counter.'" tabindex="-1" aria-labelledby="'.$el.$counter.'label'.'" aria-hidden="true">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="'.$el.$counter.'label'.'">Заголовок модального окна</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+              </div>
+              <div class="modal-body">
+                <table class="table table-bordered"><tr>
+                  '.self::_getForEachHtml($num,'<th>','</th>').'</tr><tr>
+                  '.self::_getForEachHtml($num,'<td>','</td>',true).'</tr>
+                </table>
+              </div>
+              <div class="modal-footer"
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+              </div>
+            </div>
+          </div>
+        </div>';
         }
         else{
           $result .= '
@@ -225,6 +247,9 @@ class sys {
       }
       $nextLevelTable = null;
   
+    }
+    foreach ($modelview as $value) {
+      $result .= $value;
     }
     $result .= '</table>';
     return $result;
@@ -289,6 +314,7 @@ class sys {
     if(!$val)
     {
       foreach ($field as $key => $value) {
+
         $result .=$start;
         $result .=$key; 
         $result .=$end;
@@ -304,6 +330,12 @@ class sys {
           $result.=$end;
           continue;
         }
+      if(is_object($value)){
+        $result .=$start;
+        $result .= '</tr><tr><td colspan="7" class = ><table></td></tr>';
+        $result .=$end;
+        continue;
+      }
       $result.=$start; 
       $result.=$value;
       $result.=$end;

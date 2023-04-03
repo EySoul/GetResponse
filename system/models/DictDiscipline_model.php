@@ -27,6 +27,15 @@ class DictDiscipline_model extends model
 
   return $return;
   }
+  public function get_idData($id){
+
+    $URLget = "/d/discipline/".$id;
+    
+    $return = sys::getResponse($URLget);
+
+    return $return;
+
+  }
   
   // модель для удалени
 }

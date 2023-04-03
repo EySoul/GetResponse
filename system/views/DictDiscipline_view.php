@@ -13,8 +13,6 @@
     echo sys::viewTwoLevelTable($table,'dictDisciplineExternalId');
   }
   else echo sys::viewTwoLevelIdTable($table);
-  
-
 ?>
 
 </div>
