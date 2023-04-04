@@ -161,20 +161,18 @@ class sys {
       else if($key == $SecLevelName)
       {
         $result .= '
-        <td><button class="btn btn-primary show_element" data-bs-toggle="modal" data-bs-target="#'.$key.'">
-        '.$value.'
-        </button>
-        </td>';
+        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#'.$key.'">
+          '.$value.'
+        </button></td>';
         
       }
       $result .= '<td>'.$value.'</td>';
     }
     $result .= '</tr>';
-    foreach ($nextLevelTable as $key ) {
-      $result .= $key;
-    }
+    // foreach ($nextLevelTable as $key ) {
+    //   $result .= $key;
+    // }
      $result .= '</table>';
-     
     return $result;
  
   
@@ -222,7 +220,7 @@ class sys {
         else if($el == $SecLevelName)
         {
           $result .= '
-          <td><button type="button" class="btn btn-primary show_element" data-bs-toggle="modal" data-bs-target="#'.$el.$counter.'">
+          <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#'.$el.$counter.'">
             '.$field.'
           </button></td>';
           
