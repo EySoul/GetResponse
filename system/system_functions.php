@@ -161,7 +161,7 @@ class sys {
       else if($key == $SecLevelName)
       {
         $result .= '
-        <td><button class="btn btn-primary show_element" data-bs-toggle="modal" data-bs-target="#'.$key.'">
+        <td><button value="'.$value.'" id="show_element" class="btn btn-primary show_element" data-bs-toggle="modal" data-bs-target="#'.$key.'">
         '.$value.'
         </button>
         </td>';
@@ -222,7 +222,7 @@ class sys {
         else if($el == $SecLevelName)
         {
           $result .= '
-          <td><button type="button" class="btn btn-primary show_element" data-bs-toggle="modal" data-bs-target="#'.$el.$counter.'">
+          <td><button value="'.$field.'" type="button" class="btn btn-primary show_element" data-bs-toggle="modal" data-bs-target="#'.$el.'">
             '.$field.'
           </button></td>';
           
@@ -298,7 +298,7 @@ class sys {
     return $return;
   }
 
-  private function _getForEachHtml($field,$start,$end,$val = false)
+  static function _getForEachHtml($field,$start,$end,$val = false)
   {
     $result = '';
     if(!$val)

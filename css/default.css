@@ -7,7 +7,12 @@
     padding-right: 20px;
 
 }
-.overf-scroll
-{
-    overflow-y: scroll;
+.value-item{
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+.wh-main{
+    align-items: center;
+    
 }

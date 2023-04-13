@@ -2,8 +2,9 @@
 
   <?php
   $table = $data['table'];
-  var_dump($table);
-  // sys::viewDefaultTable($table);
+  if(!empty($table))
+    sys::viewDefaultTable($table);
+  else echo 'Ничего нет.';
   ?>
 
 </div>

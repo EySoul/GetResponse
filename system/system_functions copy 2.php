@@ -153,8 +153,8 @@ class sys {
     foreach ($table as $key => $value) {
       if(is_object($value))
       {
-        $nextLevelTable[] = '<td colspan="7" class="table-secondary"><table class="table border-white"><tr>'.
-        self::_getForEachHtml($value,'<th>','</th>',false).'</tr><tr>'.self::_getForEachHtml($value,'<td>','</td>',true);
+        $nextLevelTable[] = '<td colspan="8" class="table-secondary"><table class="table border-white"><tr>'.
+        self::_getForEachHtml($value,'<th>','</th>',0).'</tr><tr>'.self::_getForEachHtml($value,'<td>','</td>',1).'</table>';
         $result .= '<td>==></td>';
         continue;
       }
@@ -296,7 +296,7 @@ class sys {
     return $return;
   }
 
-  private function _getForEachHtml($field,$start,$end,$val = false)
+  public function _getForEachHtml($field,$start,$end,$val = false) 
   {
     $result = '';
     if(!$val)

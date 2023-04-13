@@ -11,19 +11,115 @@
 $(function(){
 
   $('.show_element').on('click',function(e){
-
-    document.getElementById()
+    console.log(e);
     e.preventDefault();
-    let data = $(this).serialize();
+    let id = e.currentTarget.value;
+    
+    let data = {
+      "id": id,
+    };
     $.ajax({
-      type: "POST",
-      url: SYTE_URL+'?id='+'e907c1e0-e588-42ea-860e-7fd55d354d0b',
+      type: "get",
+      url: "/DictDisciplineID",
       data: data,
-      seccess: function(result){
+      async: false,
+      success: function(result){
         $('#result').html(result);
       }
     });
-    return false;
   });
+  return false;
+
+});
+$(function(){
+
+  $('.show_element_qual').on('click',function(e){
+    console.log(e);
+    e.preventDefault();
+    let id = e.currentTarget.value;
+    
+    let data = {
+      "id": id,
+    };
+    $.ajax({
+      type: "get",
+      url: "/DictQualificationID",
+      data: data,
+      async: false,
+      success: function(result){
+        $('#result').html(result);
+      }
+    });
+  });
+  return false;
+
+});
+$(function(){
+
+  $('.show_element_studform').on('click',function(e){
+    console.log(e);
+    e.preventDefault();
+    let id = e.currentTarget.value;
+    
+    let data = {
+      "id": id,
+    };
+    $.ajax({
+      type: "get",
+      url: "/DictStudyFormID",
+      data: data,
+      async: false,
+      success: function(result){
+        $('#result').html(result);
+      }
+    });
+  });
+  return false;
+
+});
+$(function(){
+
+  $('.show_element_DictEducationDocTypes').on('click',function(e){
+    console.log(e);
+    e.preventDefault();
+    let id = e.currentTarget.value;
+    
+    let data = {
+      "id": id,
+    };
+    $.ajax({
+      type: "get",
+      url: "/DictEducationDocTypesID",
+      data: data,
+      async: false,
+      success: function(result){
+        $('#result').html(result);
+      }
+    });
+  });
+  return false;
+
+});
+$(function(){
+
+  $('.show_element_categoryName').on('click',function(e){
+    console.log(e);
+    e.preventDefault();
+    let id = e.currentTarget.value;
+    
+    let data = {
+      "id": id,
+    };
+    $.ajax({
+      type: "get",
+      url: "/DictOrdersCategoryID",
+      data: data,
+      async: false,
+      success: function(result){
+        $('#result').html(result);
+      }
+    });
+  });
+  return false;
 
 });
